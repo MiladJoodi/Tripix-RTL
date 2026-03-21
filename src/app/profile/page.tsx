@@ -485,7 +485,7 @@ export default function ProfilePage() {
 
             <div className="flex items-center justify-center gap-2 pt-2">
               <a
-                href="https://github.com/MiladJoodi/Tripix"
+                href="https://github.com/MiladJoodi/Tripix-RTL"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
