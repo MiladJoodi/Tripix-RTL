@@ -31,11 +31,7 @@ export const useThemeStore = create<ThemeStore>((set, get) => ({
     let theme: ThemeMode = "light";
     try {
       const saved = localStorage.getItem(STORAGE_KEY) as ThemeMode | null;
-      if (saved === "dark" || saved === "light") {
-        theme = saved;
-      } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        theme = "dark";
-      }
+      if (saved === "dark") theme = "dark";
     } catch {}
     applyTheme(theme);
     set({ theme, hydrated: true });

@@ -57,10 +57,6 @@
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   --glass-bg: rgba(30, 41, 59, 0.9);
-
-  --color-primary-50: #172554;
-  --color-primary-100: #1e3a8a;
-  --color-primary-200: #1e40af;
 }
 
 @layer base {

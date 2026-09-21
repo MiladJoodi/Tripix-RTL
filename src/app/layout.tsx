@@ -14,21 +14,18 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
-  ],
+  themeColor: "#ffffff",
 };
 
 const themeInitScript = `
 (function(){
   try {
     var t = localStorage.getItem('tripix-theme');
-    var dark = t === 'dark' || (t !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    if (dark) {
+    if (t === 'dark') {
       document.documentElement.classList.add('dark');
       document.documentElement.style.colorScheme = 'dark';
     } else {
+      document.documentElement.classList.remove('dark');
       document.documentElement.style.colorScheme = 'light';
     }
   } catch (e) {}

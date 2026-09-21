@@ -94,13 +94,13 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <p className="text-primary-200 text-xs md:text-sm font-medium mb-1 md:mb-2 tracking-wide">
+            <p className="text-white/75 text-xs md:text-sm font-medium mb-1 md:mb-2 tracking-wide">
               تریپیکس
             </p>
             <h1 className="text-2xl md:text-4xl font-bold text-white mb-1 md:mb-2">
               کجا میخوای بری؟
             </h1>
-            <p className="text-primary-200 text-sm md:text-base">
+            <p className="text-white/85 text-sm md:text-base">
               جستجو و رزرو بلیط اتوبوس، قطار و هواپیما
             </p>
           </motion.div>

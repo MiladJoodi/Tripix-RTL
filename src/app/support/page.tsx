@@ -143,10 +143,10 @@ export default function SupportPage() {
             </div>
             <div>
               <h2 className="font-bold text-lg mb-1">ما اینجاییم کمکتون کنیم</h2>
-              <p className="text-sm text-primary-100 leading-relaxed">
+              <p className="text-sm text-white/85 leading-relaxed">
                 سوالات متداول را ببینید یا مستقیم با اپراتور گفتگو کنید.
               </p>
-              <div className="flex items-center gap-1.5 mt-3 text-xs text-primary-200">
+              <div className="flex items-center gap-1.5 mt-3 text-xs text-white/70">
                 <Clock className="w-3.5 h-3.5" />
                 میانگین پاسخ: کمتر از {toPersianDigits(2)} دقیقه
               </div>
@@ -281,7 +281,7 @@ export default function SupportPage() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold">سارا — پشتیبانی</p>
-                    <p className="text-[11px] text-primary-100">آنلاین</p>
+                    <p className="text-[11px] text-white/80">آنلاین</p>
                   </div>
                 </div>
                 <button
