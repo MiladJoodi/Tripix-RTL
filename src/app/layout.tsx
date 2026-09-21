@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Toaster } from "sonner";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeToaster } from "@/components/theme/theme-toaster";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,10 +14,26 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  themeColor: "#ffffff",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
 };
+
+const themeInitScript = `
+(function(){
+  try {
+    var t = localStorage.getItem('tripix-theme');
+    var dark = t === 'dark' || (t !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.style.colorScheme = 'dark';
+    } else {
+      document.documentElement.style.colorScheme = 'light';
+    }
+  } catch (e) {}
+})();
+`;
 
 export default function RootLayout({
   children,
@@ -24,21 +41,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" dir="rtl">
-      <body className="min-h-dvh bg-surface-secondary">
-        <SidebarNav />
-        <div className="lg:ms-64 min-h-dvh">
-          <div className="max-w-6xl mx-auto">
-            {children}
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="min-h-dvh bg-surface-secondary text-text-primary">
+        <ThemeProvider>
+          <SidebarNav />
+          <div className="lg:ms-64 min-h-dvh">
+            <div className="max-w-6xl mx-auto">{children}</div>
+            <BottomNav />
           </div>
-          <BottomNav />
-        </div>
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            className: "!rounded-xl !shadow-lg !border-slate-100",
-          }}
-        />
+          <ThemeToaster />
+        </ThemeProvider>
       </body>
     </html>
   );

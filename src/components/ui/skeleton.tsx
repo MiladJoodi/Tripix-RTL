@@ -6,7 +6,7 @@ export function Skeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "animate-pulse rounded-lg bg-slate-200",
+        "animate-pulse rounded-lg bg-border",
         className
       )}
     />
@@ -15,7 +15,7 @@ export function Skeleton({ className }: { className?: string }) {
 
 export function TicketCardSkeleton() {
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm space-y-3">
+    <div className="bg-surface rounded-2xl p-4 shadow-sm space-y-3">
       <div className="flex items-center justify-between">
         <Skeleton className="h-5 w-24" />
         <Skeleton className="h-6 w-16 rounded-full" />
@@ -33,7 +33,7 @@ export function TicketCardSkeleton() {
           <Skeleton className="h-4 w-20" />
         </div>
       </div>
-      <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+      <div className="flex items-center justify-between pt-2 border-t border-border">
         <Skeleton className="h-4 w-20" />
         <Skeleton className="h-8 w-24 rounded-lg" />
       </div>

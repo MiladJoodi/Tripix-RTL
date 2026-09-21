@@ -14,8 +14,8 @@ export function PassengerSelector({ value, onChange }: PassengerSelectorProps) {
       <label className="text-xs font-medium text-text-secondary mb-1 block">
         تعداد مسافر
       </label>
-      <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-slate-200 bg-white">
-        <Users className="w-4 h-4 text-slate-400" />
+      <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-border bg-surface">
+        <Users className="w-4 h-4 text-text-muted" />
         <button
           type="button"
           onClick={() => onChange(Math.max(1, value - 1))}
@@ -23,8 +23,8 @@ export function PassengerSelector({ value, onChange }: PassengerSelectorProps) {
           className={cn(
             "w-8 h-8 rounded-lg flex items-center justify-center transition-all",
             value <= 1
-              ? "bg-slate-100 text-slate-300"
-              : "bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95"
+              ? "bg-surface-tertiary text-text-muted"
+              : "bg-surface-tertiary text-text-secondary hover:bg-border active:scale-95"
           )}
         >
           <Minus className="w-4 h-4" />
@@ -39,7 +39,7 @@ export function PassengerSelector({ value, onChange }: PassengerSelectorProps) {
           className={cn(
             "w-8 h-8 rounded-lg flex items-center justify-center transition-all",
             value >= 9
-              ? "bg-slate-100 text-slate-300"
+              ? "bg-surface-tertiary text-text-muted"
               : "bg-primary-50 text-primary-600 hover:bg-primary-100 active:scale-95"
           )}
         >

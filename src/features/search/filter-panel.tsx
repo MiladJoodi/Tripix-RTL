@@ -29,7 +29,7 @@ export function FilterPanel() {
   const { filters, setFilters, resetFilters } = useSearchStore();
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 space-y-6 sticky top-20">
+    <div className="bg-surface rounded-2xl border border-border shadow-sm p-5 space-y-6 sticky top-20">
       <div className="flex items-center justify-between">
         <h2 className="font-bold text-text-primary">فیلترها</h2>
         <button
@@ -53,7 +53,7 @@ export function FilterPanel() {
                 "w-full text-right px-3 py-2 rounded-lg text-sm font-medium transition-all",
                 filters.sortBy === opt.value
                   ? "bg-primary-50 text-primary-600"
-                  : "text-text-secondary hover:bg-slate-50"
+                  : "text-text-secondary hover:bg-surface-tertiary"
               )}
             >
               {opt.label}
@@ -99,7 +99,7 @@ export function FilterPanel() {
                 "px-3 py-1.5 rounded-lg text-xs font-medium transition-all",
                 filters.departureTime === opt.value
                   ? "bg-primary-600 text-white"
-                  : "bg-slate-100 text-text-secondary hover:bg-slate-200"
+                  : "bg-surface-tertiary text-text-secondary hover:bg-border"
               )}
             >
               {opt.label}
@@ -121,7 +121,7 @@ export function FilterPanel() {
                 "w-full text-right px-3 py-2 rounded-lg text-sm font-medium transition-all",
                 filters.stopsOnly === opt.value
                   ? "bg-primary-50 text-primary-600"
-                  : "text-text-secondary hover:bg-slate-50"
+                  : "text-text-secondary hover:bg-surface-tertiary"
               )}
             >
               {opt.label}

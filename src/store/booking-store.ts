@@ -1,20 +1,19 @@
 import { create } from "zustand";
 import { Ticket, Passenger, Booking } from "@/types";
 import { generateBookingRef, generateId } from "@/utils/helpers";
+import { createDemoBookings } from "@/data/demo-bookings";
+
+const STORAGE_KEY = "tripix-bookings";
+const SEED_VERSION_KEY = "tripix-bookings-seed";
+const SEED_VERSION = "v2";
 
 interface BookingStore {
-  // Selected ticket for booking
   selectedTicket: Ticket | null;
-
-  // Booking flow
-  step: number; // 0: passenger info, 1: review, 2: confirmation
+  step: number;
   passengers: Passenger[];
-
-  // Completed bookings
   bookings: Booking[];
   currentBooking: Booking | null;
 
-  // Actions
   selectTicket: (ticket: Ticket) => void;
   setStep: (step: number) => void;
   setPassengers: (passengers: Passenger[]) => void;
@@ -22,6 +21,12 @@ interface BookingStore {
   loadBookings: () => void;
   clearCurrentBooking: () => void;
   reset: () => void;
+}
+
+function persist(bookings: Booking[]) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
+  } catch {}
 }
 
 export const useBookingStore = create<BookingStore>((set, get) => ({
@@ -55,21 +60,45 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
     set({
       currentBooking: booking,
       bookings: updated,
-      step: 2,
+      step: 3,
     });
-
-    try {
-      localStorage.setItem("tripix-bookings", JSON.stringify(updated));
-    } catch {}
+    persist(updated);
   },
 
   loadBookings: () => {
     try {
-      const raw = localStorage.getItem("tripix-bookings");
+      const seedVer = localStorage.getItem(SEED_VERSION_KEY);
+      const raw = localStorage.getItem(STORAGE_KEY);
+      let existing: Booking[] = [];
+
       if (raw) {
-        set({ bookings: JSON.parse(raw) });
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) existing = parsed;
       }
-    } catch {}
+
+      if (seedVer !== SEED_VERSION) {
+        const demos = createDemoBookings();
+        const demoIds = new Set(demos.map((b) => b.id));
+        const userOnly = existing.filter((b) => !demoIds.has(b.id) && !String(b.id).startsWith("demo_"));
+        const merged = [...userOnly, ...demos];
+        localStorage.setItem(SEED_VERSION_KEY, SEED_VERSION);
+        persist(merged);
+        set({ bookings: merged });
+        return;
+      }
+
+      if (existing.length === 0) {
+        const demos = createDemoBookings();
+        persist(demos);
+        set({ bookings: demos });
+        return;
+      }
+
+      set({ bookings: existing });
+    } catch {
+      const demos = createDemoBookings();
+      set({ bookings: demos });
+    }
   },
 
   clearCurrentBooking: () =>

@@ -4,15 +4,26 @@ import { Calendar } from "lucide-react";
 import DatePickerComponent from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import { cn } from "@/utils/helpers";
 
-interface DatePickerProps {
+interface BirthDatePickerProps {
   value: string;
   onChange: (value: string) => void;
+  error?: boolean;
+  label?: string;
 }
 
-export function DatePicker({ value, onChange }: DatePickerProps) {
+export function BirthDatePicker({
+  value,
+  onChange,
+  error,
+  label = "تاریخ تولد",
+}: BirthDatePickerProps) {
   function handleChange(dateObj: any) {
-    if (!dateObj) return;
+    if (!dateObj) {
+      onChange("");
+      return;
+    }
     const g = dateObj.toDate();
     const iso = g.toISOString().split("T")[0];
     onChange(iso);
@@ -21,19 +32,25 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
   return (
     <div>
       <label className="text-xs font-medium text-text-secondary mb-1 block">
-        تاریخ حرکت
+        {label}
       </label>
       <div className="relative">
         <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted pointer-events-none z-10" />
         <DatePickerComponent
           calendar={persian}
           locale={persian_fa}
-          value={value ? new Date(value) : new Date()}
+          value={value ? new Date(value) : undefined}
           onChange={handleChange}
-          minDate={new Date()}
+          maxDate={new Date()}
           format="YYYY/MM/DD"
           calendarPosition="bottom-right"
-          inputClass="w-full pr-10 pl-3 py-3 rounded-xl border border-border bg-surface text-sm font-medium text-text-primary outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 transition-all"
+          placeholder="انتخاب تاریخ"
+          inputClass={cn(
+            "w-full pr-10 pl-3 py-2.5 rounded-xl border text-sm outline-none transition-all",
+            error
+              ? "border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-100"
+              : "border-border focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
+          )}
           containerClassName="w-full"
         />
       </div>

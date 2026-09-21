@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "vazirmatn/Vazirmatn-font-face.css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary-50: #eff6ff;
   --color-primary-100: #dbeafe;
@@ -13,14 +15,14 @@
   --color-primary-800: #1e40af;
   --color-primary-900: #1e3a8a;
 
-  --color-surface: #ffffff;
-  --color-surface-secondary: #f8fafc;
-  --color-surface-tertiary: #f1f5f9;
-  --color-border: #e2e8f0;
-  --color-border-light: #f1f5f9;
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
 
   --color-success: #10b981;
   --color-warning: #f59e0b;
@@ -30,6 +32,35 @@
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-2xl: 1.25rem;
+}
+
+:root {
+  --surface: #ffffff;
+  --surface-secondary: #f8fafc;
+  --surface-tertiary: #f1f5f9;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --glass-bg: rgba(255, 255, 255, 0.88);
+}
+
+.dark {
+  color-scheme: dark;
+  --surface: #1e293b;
+  --surface-secondary: #0f172a;
+  --surface-tertiary: #334155;
+  --border: #334155;
+  --border-light: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --glass-bg: rgba(30, 41, 59, 0.9);
+
+  --color-primary-50: #172554;
+  --color-primary-100: #1e3a8a;
+  --color-primary-200: #1e40af;
 }
 
 @layer base {
@@ -43,7 +74,7 @@
   }
 
   body {
-    @apply bg-surface-secondary text-text-primary font-sans;
+    @apply bg-surface-secondary text-text-primary font-sans antialiased;
   }
 
   button,
@@ -56,7 +87,6 @@
     cursor: pointer;
   }
 
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 4px;
   }
@@ -73,9 +103,17 @@
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
   .glass {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--glass-bg);
   }
 }

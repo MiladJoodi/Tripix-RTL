@@ -70,11 +70,11 @@ export function FilterModal({ open, onClose }: FilterModalProps) {
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl max-h-[85vh] overflow-y-auto safe-bottom"
+            className="fixed inset-x-0 bottom-0 z-50 bg-surface rounded-t-3xl max-h-[85vh] overflow-y-auto safe-bottom"
           >
             {/* Handle */}
             <div className="flex justify-center pt-3 pb-2">
-              <div className="w-10 h-1 bg-slate-300 rounded-full" />
+              <div className="w-10 h-1 bg-border rounded-full" />
             </div>
 
             {/* Header */}
@@ -82,9 +82,9 @@ export function FilterModal({ open, onClose }: FilterModalProps) {
               <h2 className="text-lg font-bold text-text-primary">فیلترها</h2>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+                className="p-2 hover:bg-surface-tertiary rounded-full transition-colors"
               >
-                <X className="w-5 h-5 text-slate-500" />
+                <X className="w-5 h-5 text-text-secondary" />
               </button>
             </div>
 
@@ -102,7 +102,7 @@ export function FilterModal({ open, onClose }: FilterModalProps) {
                         "flex-1 py-2.5 rounded-xl text-sm font-medium transition-all",
                         local.sortBy === opt.value
                           ? "bg-primary-600 text-white"
-                          : "bg-slate-100 text-text-secondary hover:bg-slate-200"
+                          : "bg-surface-tertiary text-text-secondary hover:bg-border"
                       )}
                     >
                       {opt.label}
@@ -153,7 +153,7 @@ export function FilterModal({ open, onClose }: FilterModalProps) {
                         "px-3 py-2 rounded-xl text-sm font-medium transition-all",
                         local.departureTime === opt.value
                           ? "bg-primary-600 text-white"
-                          : "bg-slate-100 text-text-secondary hover:bg-slate-200"
+                          : "bg-surface-tertiary text-text-secondary hover:bg-border"
                       )}
                     >
                       {opt.label}
@@ -177,7 +177,7 @@ export function FilterModal({ open, onClose }: FilterModalProps) {
                         "flex-1 py-2.5 rounded-xl text-sm font-medium transition-all",
                         local.stopsOnly === opt.value
                           ? "bg-primary-600 text-white"
-                          : "bg-slate-100 text-text-secondary hover:bg-slate-200"
+                          : "bg-surface-tertiary text-text-secondary hover:bg-border"
                       )}
                     >
                       {opt.label}
@@ -188,10 +188,10 @@ export function FilterModal({ open, onClose }: FilterModalProps) {
             </div>
 
             {/* Actions */}
-            <div className="sticky bottom-0 px-5 py-4 bg-white border-t border-slate-100 flex gap-3 safe-bottom">
+            <div className="sticky bottom-0 px-5 py-4 bg-surface border-t border-border flex gap-3 safe-bottom">
               <button
                 onClick={reset}
-                className="flex-1 py-3 rounded-xl border border-slate-200 text-sm font-semibold text-text-secondary hover:bg-slate-50 transition-colors"
+                className="flex-1 py-3 rounded-xl border border-border text-sm font-semibold text-text-secondary hover:bg-surface-tertiary transition-colors"
               >
                 حذف فیلترها
               </button>

@@ -52,11 +52,11 @@ export function CityPicker({ label, value, onChange, placeholder = "انتخاب
         className={cn(
           "w-full flex items-center gap-2 px-3 py-3 rounded-xl border text-right transition-all",
           open
-            ? "border-primary-400 ring-2 ring-primary-100 bg-white"
-            : "border-slate-200 bg-white hover:border-slate-300"
+            ? "border-primary-400 ring-2 ring-primary-100 bg-surface"
+            : "border-border bg-surface hover:border-text-muted"
         )}
       >
-        <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
+        <MapPin className="w-4 h-4 text-text-muted shrink-0" />
         {value && !open ? (
           <div className="flex items-center justify-between flex-1 min-w-0">
             <span className="font-medium text-text-primary truncate">
@@ -68,9 +68,9 @@ export function CityPicker({ label, value, onChange, placeholder = "انتخاب
                 e.stopPropagation();
                 onChange(null);
               }}
-              className="p-0.5 hover:bg-slate-100 rounded"
+              className="p-0.5 hover:bg-surface-tertiary rounded"
             >
-              <X className="w-3.5 h-3.5 text-slate-400" />
+              <X className="w-3.5 h-3.5 text-text-muted" />
             </button>
           </div>
         ) : open ? (
@@ -80,11 +80,11 @@ export function CityPicker({ label, value, onChange, placeholder = "انتخاب
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={placeholder}
-            className="flex-1 text-sm outline-none bg-transparent placeholder:text-slate-400"
+            className="flex-1 text-sm outline-none bg-transparent placeholder:text-text-muted"
             onClick={(e) => e.stopPropagation()}
           />
         ) : (
-          <span className="text-sm text-slate-400">{placeholder}</span>
+          <span className="text-sm text-text-muted">{placeholder}</span>
         )}
       </button>
 
@@ -95,10 +95,10 @@ export function CityPicker({ label, value, onChange, placeholder = "انتخاب
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className="absolute z-50 top-full inset-x-0 mt-1 bg-white rounded-xl border border-slate-200 shadow-lg max-h-48 overflow-y-auto"
+            className="absolute z-50 top-full inset-x-0 mt-1 bg-surface rounded-xl border border-border shadow-lg max-h-48 overflow-y-auto"
           >
             {results.length === 0 ? (
-              <p className="text-sm text-slate-400 p-3">شهری یافت نشد</p>
+              <p className="text-sm text-text-muted p-3">شهری یافت نشد</p>
             ) : (
               results.map((city) => (
                 <button
@@ -110,11 +110,11 @@ export function CityPicker({ label, value, onChange, placeholder = "انتخاب
                     setQuery("");
                   }}
                   className={cn(
-                    "w-full flex items-center gap-3 px-3 py-2.5 text-right hover:bg-slate-50 transition-colors",
+                    "w-full flex items-center gap-3 px-3 py-2.5 text-right hover:bg-surface-tertiary transition-colors",
                     value?.id === city.id && "bg-primary-50"
                   )}
                 >
-                  <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
+                  <MapPin className="w-4 h-4 text-text-muted shrink-0" />
                   <div>
                     <p className="text-sm font-medium text-text-primary">
                       {city.name}

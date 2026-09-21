@@ -27,13 +27,13 @@ export function PageHeader({
         "sticky top-0 z-20 px-4 md:px-6 py-3 md:py-4 flex items-center gap-3",
         transparent
           ? "bg-transparent"
-          : "bg-white/90 glass border-b border-slate-100"
+          : "bg-surface/90 glass border-b border-border"
       )}
     >
       {showBack && (
         <button
           onClick={() => router.back()}
-          className="p-1.5 -me-1.5 rounded-lg hover:bg-slate-100 active:scale-95 transition-all"
+          className="p-1.5 -me-1.5 rounded-lg hover:bg-surface-tertiary active:scale-95 transition-all"
         >
           <ChevronRight className="w-5 h-5 text-text-primary" />
         </button>

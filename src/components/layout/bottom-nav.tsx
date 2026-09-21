@@ -2,26 +2,30 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Home, Ticket, User } from "lucide-react";
+import { Home, Ticket, User, Headphones } from "lucide-react";
 import { cn } from "@/utils/helpers";
 
 const navItems = [
   { href: "/", icon: Home, label: "خانه" },
   { href: "/bookings", icon: Ticket, label: "رزروها" },
+  { href: "/support", icon: Headphones, label: "پشتیبانی" },
   { href: "/profile", icon: User, label: "پروفایل" },
 ];
 
 export function BottomNav() {
   const pathname = usePathname();
 
-  // Hide bottom nav on booking flow
-  if (pathname.startsWith("/booking") || pathname.startsWith("/confirmation")) {
+  if (
+    pathname.startsWith("/booking") ||
+    pathname.startsWith("/confirmation") ||
+    pathname.startsWith("/ticket")
+  ) {
     return null;
   }
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-30 bg-white border-t border-slate-100 safe-bottom lg:hidden">
-      <div className="flex items-center justify-around h-16">
+    <nav className="fixed bottom-0 inset-x-0 z-30 bg-surface border-t border-border safe-bottom lg:hidden">
+      <div className="flex items-center justify-around h-14">
         {navItems.map((item) => {
           const active =
             item.href === "/"
@@ -33,10 +37,10 @@ export function BottomNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex flex-col items-center gap-0.5 px-4 py-1 rounded-xl transition-all",
+                "flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl transition-all",
                 active
                   ? "text-primary-600"
-                  : "text-slate-400 hover:text-slate-600"
+                  : "text-text-muted hover:text-text-secondary"
               )}
             >
               <item.icon

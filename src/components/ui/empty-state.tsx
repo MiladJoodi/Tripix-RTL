@@ -17,8 +17,8 @@ export function EmptyState({ icon, title, description, action }: EmptyStateProps
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center justify-center py-16 px-6 text-center"
     >
-      <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mb-4">
-        {icon || <SearchX className="w-8 h-8 text-slate-400" />}
+      <div className="w-16 h-16 rounded-full bg-surface-tertiary flex items-center justify-center mb-4">
+        {icon || <SearchX className="w-8 h-8 text-text-muted" />}
       </div>
       <h3 className="text-lg font-semibold text-text-primary mb-1">{title}</h3>
       <p className="text-sm text-text-secondary max-w-xs">{description}</p>

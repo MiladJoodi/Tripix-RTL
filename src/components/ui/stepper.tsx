@@ -22,7 +22,7 @@ export function Stepper({ steps, currentStep }: StepperProps) {
                 i === currentStep &&
                   "bg-primary-600 text-white ring-4 ring-primary-100",
                 i > currentStep &&
-                  "bg-slate-100 text-slate-400"
+                  "bg-surface-tertiary text-text-muted"
               )}
             >
               {i < currentStep ? (
@@ -34,7 +34,7 @@ export function Stepper({ steps, currentStep }: StepperProps) {
             <span
               className={cn(
                 "text-xs mt-1.5 font-medium whitespace-nowrap",
-                i <= currentStep ? "text-primary-600" : "text-slate-400"
+                i <= currentStep ? "text-primary-600" : "text-text-muted"
               )}
             >
               {label}
@@ -44,7 +44,7 @@ export function Stepper({ steps, currentStep }: StepperProps) {
             <div
               className={cn(
                 "flex-1 h-0.5 mx-2 mt-[-16px] transition-all duration-300",
-                i < currentStep ? "bg-primary-600" : "bg-slate-200"
+                i < currentStep ? "bg-primary-600" : "bg-border"
               )}
             />
           )}

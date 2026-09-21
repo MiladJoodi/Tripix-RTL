@@ -57,7 +57,7 @@ export interface Booking {
   bookingRef: string;
   ticket: Ticket;
   passengers: Passenger[];
-  status: "confirmed" | "pending" | "cancelled";
+  status: "confirmed" | "pending" | "cancelled" | "completed";
   bookedAt: string;
   totalPrice: number;
 }

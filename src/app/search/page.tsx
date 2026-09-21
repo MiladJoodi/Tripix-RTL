@@ -15,13 +15,19 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { FilterModal } from "@/features/search/filter-modal";
 import { FilterPanel } from "@/features/search/filter-panel";
 import { PageHeader } from "@/components/layout/page-header";
-import { formatDate, getTimeOfDay, delay, toPersianDigits } from "@/utils/helpers";
+import { formatDate, getTimeOfDay, delay, toPersianDigits, cn } from "@/utils/helpers";
 
 function SearchResultsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { filters } = useSearchStore();
+  const { filters, setFilters } = useSearchStore();
   const { selectTicket } = useBookingStore();
+
+  const sortOptions = [
+    { value: "best" as const, label: "پیشنهادی" },
+    { value: "cheapest" as const, label: "ارزان‌ترین" },
+    { value: "fastest" as const, label: "سریع‌ترین" },
+  ];
 
   const from = searchParams.get("from") || "";
   const to = searchParams.get("to") || "";
@@ -117,7 +123,7 @@ function SearchResultsContent() {
         action={
           <button
             onClick={() => setFilterOpen(true)}
-            className="p-2 hover:bg-slate-100 rounded-lg transition-colors relative lg:hidden"
+            className="p-2 hover:bg-surface-tertiary rounded-lg transition-colors relative lg:hidden"
           >
             <SlidersHorizontal className="w-5 h-5 text-text-primary" />
             {hasActiveFilters && (
@@ -127,22 +133,31 @@ function SearchResultsContent() {
         }
       />
 
-      {/* Mobile info bar */}
-      <div className="px-4 py-3 flex items-center justify-between lg:hidden">
+      {/* Mobile: result count + sort chips */}
+      <div className="px-4 pt-2 pb-3 space-y-2.5 lg:hidden">
         <p className="text-sm text-text-secondary">
           {loading
             ? "در حال جستجو..."
             : matchType === "exact"
-            ? `${toPersianDigits(filtered.length)} نتیجه یافت شد`
+            ? `${toPersianDigits(filtered.length)} نتیجه`
             : `${toPersianDigits(filtered.length)} نتیجه پیشنهادی`}
         </p>
-        <div className="flex items-center gap-1 text-xs text-text-muted">
-          <ArrowUpDown className="w-3 h-3" />
-          {filters.sortBy === "cheapest"
-            ? "ارزان‌ترین"
-            : filters.sortBy === "fastest"
-            ? "سریع‌ترین"
-            : "بهترین"}
+        <div className="flex gap-2 overflow-x-auto scrollbar-none -mx-1 px-1">
+          {sortOptions.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => setFilters({ sortBy: opt.value })}
+              className={cn(
+                "shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors",
+                filters.sortBy === opt.value
+                  ? "bg-primary-600 text-white"
+                  : "bg-surface border border-border text-text-secondary"
+              )}
+            >
+              {opt.label}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -164,14 +179,23 @@ function SearchResultsContent() {
                 ? `${toPersianDigits(filtered.length)} نتیجه یافت شد`
                 : `${toPersianDigits(filtered.length)} نتیجه پیشنهادی`}
             </p>
-            <div className="flex items-center gap-1 text-xs text-text-muted">
-              <ArrowUpDown className="w-3 h-3" />
-              مرتب‌سازی:{" "}
-              {filters.sortBy === "cheapest"
-                ? "ارزان‌ترین"
-                : filters.sortBy === "fastest"
-                ? "سریع‌ترین"
-                : "بهترین"}
+            <div className="flex items-center gap-2">
+              <ArrowUpDown className="w-3.5 h-3.5 text-text-muted" />
+              {sortOptions.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => setFilters({ sortBy: opt.value })}
+                  className={cn(
+                    "px-3 py-1.5 rounded-lg text-xs font-medium transition-colors",
+                    filters.sortBy === opt.value
+                      ? "bg-primary-50 text-primary-700"
+                      : "text-text-muted hover:bg-surface-tertiary"
+                  )}
+                >
+                  {opt.label}
+                </button>
+              ))}
             </div>
           </div>
 

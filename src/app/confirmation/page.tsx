@@ -11,7 +11,6 @@ import {
   Bus,
   Train,
   Plane,
-  Calendar,
   Users,
 } from "lucide-react";
 import { useBookingStore } from "@/store/booking-store";
@@ -23,6 +22,7 @@ import {
   formatPrice,
   formatFullDate,
   toPersianDigits,
+  cn,
 } from "@/utils/helpers";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
@@ -148,11 +148,18 @@ function ConfirmationContent() {
                 className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors"
               >
                 <Download className="w-4 h-4" />
-                دانلود بلیط
+                دانلود بلیط (نمونه)
+              </button>
+              <button
+                onClick={() => router.push("/bookings")}
+                className="w-full py-3 bg-surface-tertiary hover:bg-border text-text-primary rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors"
+              >
+                <Users className="w-4 h-4" />
+                بلیط‌های من
               </button>
               <button
                 onClick={() => router.push("/")}
-                className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-text-primary rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-2.5 text-text-secondary text-sm font-medium flex items-center justify-center gap-2 hover:text-text-primary transition-colors"
               >
                 <Home className="w-4 h-4" />
                 بازگشت به خانه
@@ -166,10 +173,10 @@ function ConfirmationContent() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden"
+              className="bg-surface rounded-2xl shadow-sm border border-border overflow-hidden"
             >
               {/* Ticket header */}
-              <div className="bg-slate-50 px-4 md:px-5 py-3 flex items-center justify-between">
+              <div className="bg-surface-tertiary px-4 md:px-5 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-lg">
                     {booking.ticket.provider.logo}
@@ -183,7 +190,7 @@ function ConfirmationContent() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 text-slate-500">
+                <div className="flex items-center gap-1 text-text-secondary">
                   {typeIcon[booking.ticket.type]}
                   <span className="text-xs font-medium">
                     {typeLabels[booking.ticket.type]}
@@ -211,7 +218,7 @@ function ConfirmationContent() {
                     </p>
                     <div className="w-20 flex items-center my-1">
                       <div className="w-2 h-2 rounded-full bg-primary-400" />
-                      <div className="flex-1 h-px bg-slate-300" />
+                      <div className="flex-1 h-px bg-border" />
                       <div className="w-2 h-2 rounded-full bg-emerald-400" />
                     </div>
                     <p className="text-xs text-text-muted">
@@ -234,9 +241,9 @@ function ConfirmationContent() {
                 </div>
 
                 {/* Passengers */}
-                <div className="border-t border-dashed border-slate-200 pt-4 mb-4">
+                <div className="border-t border-dashed border-border pt-4 mb-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Users className="w-4 h-4 text-slate-400" />
+                    <Users className="w-4 h-4 text-text-muted" />
                     <p className="text-xs font-medium text-text-muted tracking-wide">
                       مسافران
                     </p>
@@ -245,7 +252,7 @@ function ConfirmationContent() {
                     {booking.passengers.map((p, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"
+                        className="flex items-center gap-2 p-2 bg-surface-tertiary rounded-lg"
                       >
                         <div className="w-7 h-7 rounded-full bg-primary-100 flex items-center justify-center text-xs font-bold text-primary-600">
                           {p.firstName[0]}
@@ -263,7 +270,7 @@ function ConfirmationContent() {
                 </div>
 
                 {/* Booking info */}
-                <div className="border-t border-slate-100 pt-4 space-y-2 text-sm">
+                <div className="border-t border-border pt-4 space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-text-secondary">تاریخ رزرو</span>
                     <span className="font-medium">
@@ -272,11 +279,25 @@ function ConfirmationContent() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-text-secondary">وضعیت</span>
-                    <span className="font-medium text-emerald-600">
-                      تایید شده
+                    <span
+                      className={cn(
+                        "font-medium",
+                        booking.status === "confirmed" && "text-emerald-600",
+                        booking.status === "pending" && "text-amber-600",
+                        booking.status === "cancelled" && "text-red-600",
+                        booking.status === "completed" && "text-text-secondary"
+                      )}
+                    >
+                      {booking.status === "confirmed"
+                        ? "فعال"
+                        : booking.status === "pending"
+                        ? "در انتظار پرداخت"
+                        : booking.status === "cancelled"
+                        ? "لغو شده"
+                        : "انجام‌شده"}
                     </span>
                   </div>
-                  <div className="flex justify-between pt-2 border-t border-slate-100 text-base">
+                  <div className="flex justify-between pt-2 border-t border-border text-base">
                     <span className="font-semibold text-text-primary">
                       مبلغ کل
                     </span>

@@ -57,7 +57,7 @@ export function SearchForm() {
   return (
     <div className="space-y-4">
       {/* Transport type tabs */}
-      <div className="flex bg-slate-100 rounded-xl p-1">
+      <div className="flex bg-surface-tertiary rounded-xl p-1">
         {tabs.map((tab) => (
           <button
             key={tab.type}
@@ -66,7 +66,7 @@ export function SearchForm() {
             className={cn(
               "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all",
               type === tab.type
-                ? "bg-white text-primary-600 shadow-sm"
+                ? "bg-surface text-primary-600 shadow-sm"
                 : "text-text-secondary hover:text-text-primary"
             )}
           >
@@ -88,9 +88,9 @@ export function SearchForm() {
         <button
           type="button"
           onClick={swapCities}
-          className="absolute left-1/2 -translate-x-1/2 top-[52px] md:top-1/2 md:-translate-y-1/2 z-10 w-8 h-8 bg-white border border-slate-200 rounded-full flex items-center justify-center shadow-sm hover:bg-slate-50 active:scale-90 transition-all"
+          className="absolute left-1/2 -translate-x-1/2 top-[52px] md:top-1/2 md:-translate-y-1/2 z-10 w-8 h-8 bg-surface border border-border rounded-full flex items-center justify-center shadow-sm hover:bg-surface-tertiary active:scale-90 transition-all"
         >
-          <ArrowRightLeft className="w-3.5 h-3.5 text-slate-500 rotate-90 md:rotate-0" />
+          <ArrowRightLeft className="w-3.5 h-3.5 text-text-secondary rotate-90 md:rotate-0" />
         </button>
 
         <CityPicker

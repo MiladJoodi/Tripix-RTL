@@ -93,7 +93,7 @@ function TicketDetailsContent() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-4 md:p-5 bg-white rounded-2xl shadow-sm border border-slate-100"
+            className="p-4 md:p-5 bg-surface rounded-2xl shadow-sm border border-border"
           >
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
@@ -110,7 +110,7 @@ function TicketDetailsContent() {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center gap-1 text-slate-500">
+              <div className="flex items-center gap-1 text-text-secondary">
                 {typeIcon[ticket.type]}
                 <span className="text-sm font-medium">
                   {typeLabels[ticket.type]}
@@ -130,7 +130,7 @@ function TicketDetailsContent() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="p-4 md:p-5 bg-white rounded-2xl shadow-sm border border-slate-100"
+            className="p-4 md:p-5 bg-surface rounded-2xl shadow-sm border border-border"
           >
             <h3 className="text-sm font-semibold text-text-primary mb-4">
               تایم‌لاین سفر
@@ -152,7 +152,7 @@ function TicketDetailsContent() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="p-4 md:p-5 bg-white rounded-2xl shadow-sm border border-slate-100"
+                className="p-4 md:p-5 bg-surface rounded-2xl shadow-sm border border-border"
               >
                 <h3 className="text-sm font-semibold text-text-primary mb-3">
                   امکانات
@@ -161,7 +161,7 @@ function TicketDetailsContent() {
                   {ticket.amenities.map((amenity) => (
                     <span
                       key={amenity}
-                      className="px-3 py-1.5 bg-slate-50 rounded-lg text-xs font-medium text-text-secondary"
+                      className="px-3 py-1.5 bg-surface-tertiary rounded-lg text-xs font-medium text-text-secondary"
                     >
                       {amenity}
                     </span>
@@ -175,20 +175,20 @@ function TicketDetailsContent() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="p-4 md:p-5 bg-white rounded-2xl shadow-sm border border-slate-100"
+                className="p-4 md:p-5 bg-surface rounded-2xl shadow-sm border border-border"
               >
                 <h3 className="text-sm font-semibold text-text-primary mb-3">
                   بار
                 </h3>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <Luggage className="w-4 h-4 text-slate-400" />
+                    <Luggage className="w-4 h-4 text-text-muted" />
                     <span className="text-sm text-text-secondary">
                       کابین: {ticket.baggage.cabin}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Luggage className="w-4 h-4 text-slate-400" />
+                    <Luggage className="w-4 h-4 text-text-muted" />
                     <span className="text-sm text-text-secondary">
                       بار: {ticket.baggage.checked}
                     </span>
@@ -198,31 +198,29 @@ function TicketDetailsContent() {
             )}
           </div>
 
-          {/* Seats info */}
+          {/* Seats — compact inline on mobile */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="p-4 md:p-5 bg-white rounded-2xl shadow-sm border border-slate-100"
+            className="flex items-center justify-between px-4 py-3 bg-surface rounded-2xl shadow-sm border border-border"
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-slate-400" />
-                <span className="text-sm text-text-secondary">
-                  {toPersianDigits(ticket.seatsAvailable)} صندلی خالی
-                </span>
-              </div>
-              <span
-                className={cn(
-                  "text-xs font-medium px-2 py-0.5 rounded-full",
-                  ticket.seatsAvailable <= 10
-                    ? "bg-red-50 text-red-600"
-                    : "bg-emerald-50 text-emerald-600"
-                )}
-              >
-                {ticket.seatsAvailable <= 10 ? "محدود" : "موجود"}
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4 text-text-muted" />
+              <span className="text-sm text-text-secondary">
+                {toPersianDigits(ticket.seatsAvailable)} صندلی خالی
               </span>
             </div>
+            <span
+              className={cn(
+                "text-xs font-medium px-2 py-0.5 rounded-full",
+                ticket.seatsAvailable <= 10
+                  ? "bg-red-50 text-red-600"
+                  : "bg-emerald-50 text-emerald-600"
+              )}
+            >
+              {ticket.seatsAvailable <= 10 ? "محدود" : "موجود"}
+            </span>
           </motion.div>
         </div>
 
@@ -232,7 +230,7 @@ function TicketDetailsContent() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 sticky top-20"
+            className="bg-surface rounded-2xl shadow-sm border border-border p-5 sticky top-20"
           >
             <div className="text-center mb-4">
               <PriceBadge price={ticket.price} size="lg" />
@@ -240,15 +238,15 @@ function TicketDetailsContent() {
             </div>
 
             <div className="space-y-3 mb-5 text-sm">
-              <div className="flex justify-between py-2 border-b border-slate-100">
+              <div className="flex justify-between py-2 border-b border-border">
                 <span className="text-text-secondary">شرکت</span>
                 <span className="font-medium">{ticket.provider.name}</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-slate-100">
+              <div className="flex justify-between py-2 border-b border-border">
                 <span className="text-text-secondary">کلاس</span>
                 <span className="font-medium">{ticket.class}</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-slate-100">
+              <div className="flex justify-between py-2 border-b border-border">
                 <span className="text-text-secondary">مدت سفر</span>
                 <span className="font-medium">
                   {formatDuration(ticket.duration)}
@@ -276,16 +274,16 @@ function TicketDetailsContent() {
       </div>
 
       {/* Mobile bottom CTA */}
-      <div className="fixed bottom-0 inset-x-0 z-30 bg-white border-t border-slate-100 safe-bottom lg:hidden">
-        <div className="px-4 py-3 flex items-center justify-between">
-          <div>
+      <div className="fixed bottom-0 inset-x-0 z-30 bg-surface border-t border-border safe-bottom lg:hidden">
+        <div className="px-4 py-3 flex items-center justify-between gap-3">
+          <div className="min-w-0">
             <PriceBadge price={ticket.price} size="lg" />
             <p className="text-xs text-text-muted">به ازای هر نفر</p>
           </div>
           <motion.button
             whileTap={{ scale: 0.97 }}
             onClick={() => router.push(`/booking/?ticket=${ticket.id}`)}
-            className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold text-sm shadow-lg shadow-primary-600/20 transition-colors"
+            className="shrink-0 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold text-sm shadow-lg shadow-primary-600/20 transition-colors"
           >
             ادامه رزرو
           </motion.button>

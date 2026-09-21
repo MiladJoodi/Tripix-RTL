@@ -24,7 +24,7 @@ export function Timeline({
   return (
     <div className="relative pr-8">
       {/* Vertical line */}
-      <div className="absolute right-[11px] top-2 bottom-2 w-0.5 bg-slate-200" />
+      <div className="absolute right-[11px] top-2 bottom-2 w-0.5 bg-border" />
 
       {/* Departure */}
       <div className="relative pb-6">
@@ -65,7 +65,7 @@ export function Timeline({
       {stops.length === 0 && (
         <div className="relative pb-6">
           <div className="absolute right-[-18px] top-1">
-            <Clock className="w-[10px] h-[10px] text-slate-400" />
+            <Clock className="w-[10px] h-[10px] text-text-muted" />
           </div>
           <p className="text-xs text-text-muted">{formatDuration(duration)}</p>
         </div>

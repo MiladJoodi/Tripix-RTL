@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Clock, User, CreditCard } from "lucide-react";
+import { User } from "lucide-react";
 import { Ticket, Passenger } from "@/types";
 import { formatTime, formatDuration, formatPrice, toPersianDigits } from "@/utils/helpers";
 
@@ -20,7 +20,7 @@ export function ReviewStep({ ticket, passengers }: ReviewStepProps) {
       className="space-y-3"
     >
       {/* Trip summary */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+      <div className="bg-surface rounded-2xl p-4 shadow-sm border border-border">
         <h3 className="text-sm font-semibold text-text-primary mb-3">
           خلاصه سفر
         </h3>
@@ -32,14 +32,14 @@ export function ReviewStep({ ticket, passengers }: ReviewStepProps) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between py-3 border-y border-slate-100">
+        <div className="flex items-center justify-between py-3 border-y border-border">
           <div>
             <p className="text-lg font-bold">{formatTime(ticket.departureTime)}</p>
             <p className="text-xs text-text-secondary">{ticket.origin.name}</p>
           </div>
           <div className="text-center">
             <p className="text-xs text-text-muted">{formatDuration(ticket.duration)}</p>
-            <div className="w-16 h-px bg-slate-300 my-1" />
+            <div className="w-16 h-px bg-border my-1" />
             <p className="text-xs text-text-muted">
               {ticket.stops.length === 0 ? "مستقیم" : `${toPersianDigits(ticket.stops.length)} توقف`}
             </p>
@@ -52,13 +52,13 @@ export function ReviewStep({ ticket, passengers }: ReviewStepProps) {
       </div>
 
       {/* Passengers */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+      <div className="bg-surface rounded-2xl p-4 shadow-sm border border-border">
         <h3 className="text-sm font-semibold text-text-primary mb-3">مسافران</h3>
         <div className="space-y-2">
           {passengers.map((p, i) => (
             <div
               key={i}
-              className="flex items-center gap-2 py-2 border-b border-slate-50 last:border-0"
+              className="flex items-center gap-2 py-2 border-b border-border-light last:border-0"
             >
               <div className="w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center">
                 <User className="w-4 h-4 text-primary-600" />
@@ -67,7 +67,9 @@ export function ReviewStep({ ticket, passengers }: ReviewStepProps) {
                 <p className="text-sm font-medium text-text-primary">
                   {p.firstName} {p.lastName}
                 </p>
-                <p className="text-xs text-text-muted">{p.email}</p>
+                <p className="text-xs text-text-muted">
+                  {p.phone || p.email || p.idNumber}
+                </p>
               </div>
             </div>
           ))}
@@ -75,7 +77,7 @@ export function ReviewStep({ ticket, passengers }: ReviewStepProps) {
       </div>
 
       {/* Price breakdown */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+      <div className="bg-surface rounded-2xl p-4 shadow-sm border border-border">
         <h3 className="text-sm font-semibold text-text-primary mb-3">
           جزئیات قیمت
         </h3>
@@ -92,7 +94,7 @@ export function ReviewStep({ ticket, passengers }: ReviewStepProps) {
             <span className="text-text-secondary">هزینه خدمات</span>
             <span className="text-text-primary">رایگان</span>
           </div>
-          <div className="flex justify-between pt-2 border-t border-slate-100 font-bold">
+          <div className="flex justify-between pt-2 border-t border-border font-bold">
             <span className="text-text-primary">مبلغ کل</span>
             <span className="text-primary-600 text-lg">
               {formatPrice(totalPrice)}
